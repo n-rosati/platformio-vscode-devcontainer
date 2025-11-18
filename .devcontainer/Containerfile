@@ -1,5 +1,5 @@
-ARG VARIANT=bookworm
-FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
+ARG VARIANT=debian
+FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN sudo apt-get update \
@@ -14,7 +14,7 @@ RUN service udev restart
 RUN usermod -a -G dialout vscode
 RUN usermod -a -G plugdev vscode
 
-ARG FEDORA_COMPAT=0
+ARG FEDORA_COMPAT=1
 ### Set up compatibility with Fedora host (if needed)
 ### Since Fedora uses `18` as the group for dialout, we need to add it to the container
 RUN if [ "$FEDORA_COMPAT" = "1" ]; then \
